@@ -110,6 +110,8 @@ services:
       - 8020
       - 8030
       - 8040
+    ports:
+      - 8000:8000
     networks:
       - monitor-net
 

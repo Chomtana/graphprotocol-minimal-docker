@@ -70,9 +70,9 @@ services:
       SERVER_DB_USER: ${DB_USER:-graph-node}
       SERVER_DB_PASSWORD: ${DB_PASS:-db-password}
       SERVER_DB_NAME: ${AGENT_DB_NAME:-indexer-agent}
-      VIRTUAL_HOST: ${INDEX_HOST}
-      VIRTUAL_PORT: 7600
-      LETSENCRYPT_HOST: ${INDEX_HOST}
+      # VIRTUAL_HOST: ${INDEX_HOST}
+      # VIRTUAL_PORT: 7600
+      # LETSENCRYPT_HOST: ${INDEX_HOST}
     expose:
       - 7300
       - 7600
@@ -129,65 +129,6 @@ services:
     networks:
       - monitor-net
     restart: unless-stopped
-    logging: *default-logging
-
-
-######################################################################################
-#####################          NGINX PROXY CONTAINER           #######################
-######################################################################################
-
-
-
-  nginx-proxy:
-    image: jwilder/nginx-proxy
-    container_name: nginx-proxy
-    depends_on:
-      - indexer-service
-    #environment:
-    #  PROMETHEUS_HOST: ${PROMETHEUS_HOST}
-    #  HTTP_AUTH_LOGIN: ${HTTP_AUTH_USER}
-    #  HTTP_AUTH_PASSWORD: ${HTTP_AUTH_PASSWORD}
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - nginx_certs:/etc/nginx/certs
-      - nginx_vhost:/etc/nginx/vhost.d
-      - nginx_html:/usr/share/nginx/html
-    #  - ./nginx-proxy/htpasswd:/etc/nginx/htpasswd
-      - ./nginx-proxy/nginx.conf:/etc/nginx/nginx.conf:ro
-    networks:
-      - monitor-net
-    restart: unless-stopped
-    logging: *default-logging
-
-
-######################################################################################
-#####################            NGINX SSL CONTAINER           #######################
-######################################################################################
-
-
-  nginx-ssl:
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    container_name: nginx-ssl
-    depends_on:
-      - indexer-service
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - nginx_certs:/etc/nginx/certs
-      - nginx_vhost:/etc/nginx/vhost.d
-      - nginx_html:/usr/share/nginx/html
-      - nginx_acme:/etc/acme.sh
-    #  - ./nginx-proxy/htpasswd:/etc/nginx/htpasswd
-      - ./nginx-proxy/nginx.conf:/etc/nginx/nginx.conf:ro
-    restart: unless-stopped
-    networks:
-      - monitor-net
-    restart: unless-stopped
-    environment:
-      NGINX_PROXY_CONTAINER: nginx-proxy
-      DEFAULT_EMAIL: ${EMAIL}
     logging: *default-logging
 
 
