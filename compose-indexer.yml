@@ -76,6 +76,8 @@ services:
     expose:
       - 7300
       - 7600
+    ports:
+      - 7600:7600
     networks:
       - monitor-net
     restart: unless-stopped
