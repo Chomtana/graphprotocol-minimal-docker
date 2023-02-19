@@ -144,7 +144,7 @@ services:
 
   ipfs:
     image: ipfs/go-ipfs:v0.10.0
-    ports:
-      - '5001:5001'
+    expose:
+      - 5001
     volumes:
       - ipfs-data:/data/ipfs
