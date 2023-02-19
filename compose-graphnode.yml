@@ -147,4 +147,4 @@ services:
     expose:
       - 5001
     volumes:
-      - ipfs-data:/data/ipfs
+      - ipfs_data:/data/ipfs
