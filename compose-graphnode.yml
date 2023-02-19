@@ -104,6 +104,7 @@ services:
       #LETSENCRYPT_HOST: ${QUERY_HOST}
       GRAPH_LOG_QUERY_TIMING: ${GRAPH_LOG_QUERY_TIMING:-gql}
       GRAPH_ALLOW_NON_DETERMINISTIC_FULLTEXT_SEARCH: ${FULLTEXT_SEARCH:-false}
+      ethereum: '${CHAIN_0_NAME}:${CHAIN_0_RPC}'
     restart: unless-stopped
     logging:
         driver: "journald"
