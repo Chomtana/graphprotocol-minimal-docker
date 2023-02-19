@@ -153,3 +153,5 @@ services:
       - 5001:5001
     volumes:
       - ipfs_data:/data/ipfs
+    networks:
+      - monitor-net
