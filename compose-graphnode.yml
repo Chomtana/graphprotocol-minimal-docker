@@ -80,7 +80,7 @@ services:
       - ./graph-node-configs:/root/graph-node-configs/
       - ./postgres-socket:/var/run/postgresql
     environment:
-      GRAPH_NODE_CONFIG: /root/graph-node-configs/config.toml
+      # GRAPH_NODE_CONFIG: /root/graph-node-configs/config.toml
       postgres_host: ${DB_HOST:-postgres}
       postgres_user: ${DB_USER:-graph-node}
       postgres_pass: ${DB_PASS:-db-password}
