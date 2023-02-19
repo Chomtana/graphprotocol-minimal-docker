@@ -30,7 +30,6 @@ services:
     container_name: index-node-0
     depends_on:
       - postgres
-      - ipfs
     volumes:
       - ./graph-node-configs:/root/graph-node-configs/
       - ./postgres-socket:/var/run/postgresql
@@ -78,7 +77,6 @@ services:
     container_name: query-node-0
     depends_on:
       - postgres
-      - ipfs
     volumes:
       - ./graph-node-configs:/root/graph-node-configs/
       - ./postgres-socket:/var/run/postgresql
