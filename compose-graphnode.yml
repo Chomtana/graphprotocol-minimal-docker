@@ -62,6 +62,8 @@ services:
       - 8040
     networks:
       - monitor-net
+    extra_hosts:
+      - host.docker.internal:host-gateway
     logging: *default-logging
 
 
@@ -120,6 +122,8 @@ services:
     networks:
       - monitor-net
       - traefik_proxy
+    extra_hosts:
+      - host.docker.internal:host-gateway
     labels:
       - "traefik_template=name:graph-query-node port:8000 prefix:/"
 

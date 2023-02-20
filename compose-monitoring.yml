@@ -170,6 +170,8 @@ services:
       - 3000:3000
     networks:
       - monitor-net
+    extra_hosts:
+      - host.docker.internal:host-gateway
     labels:
       org.label-schema.group: "monitoring"
     logging: *default-logging
