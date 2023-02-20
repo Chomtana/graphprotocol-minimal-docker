@@ -82,7 +82,8 @@ services:
       - monitor-net
     restart: unless-stopped
     logging: *default-logging
-
+    labels:
+      - "traefik_template=name:graph-indexer-service port:7600 prefix:/indexer-service"
 
 
 ######################################################################################

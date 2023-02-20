@@ -119,6 +119,9 @@ services:
       - 8020:8020
     networks:
       - monitor-net
+      - traefik_proxy
+    labels:
+      - "traefik_template=name:graph-query-node port:8000 prefix:/"
 
 
 ######################################################################################
