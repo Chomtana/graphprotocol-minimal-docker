@@ -25,4 +25,4 @@ policies:
 
     # <duration>  How long to wait before sending a notification again if it has already
     #             been sent successfully for an alert. (Usually ~3h or more), default = 4h
-    repeat_interval: 30m
+    repeat_interval: 1h
