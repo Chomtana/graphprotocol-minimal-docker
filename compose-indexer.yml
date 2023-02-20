@@ -80,6 +80,7 @@ services:
       - 7600:7600
     networks:
       - monitor-net
+      - traefik_proxy
     restart: unless-stopped
     logging: *default-logging
     labels:
