@@ -5,6 +5,9 @@ groups:
     expr: up == 0
     for: 30s
     labels:
+      controller_restart: "true"
+      controller_restart_files: "compose-graphnode.yml,compose-indexer.yml,compose-monitoring.yml"
+      controller_restart_folder: "[[controller_restart_folder]]"
       severity: critical
     annotations:
       summary: "Monitor service non-operational"
@@ -45,6 +48,9 @@ groups:
     expr: absent((time() - container_last_seen{name=~"query-node.*"}) < 10)
     for: 30s
     labels:
+      controller_restart: "true"
+      controller_restart_files: "compose-graphnode.yml,compose-indexer.yml,compose-monitoring.yml"
+      controller_restart_folder: "[[controller_restart_folder]]"
       severity: critical
     annotations:
       summary: "{{ $labels.instance }} is down"
@@ -72,6 +78,9 @@ groups:
     expr: absent((time() - container_last_seen{name=~"index-node.*"}) < 10)
     for: 30s
     labels:
+      controller_restart: "true"
+      controller_restart_files: "compose-graphnode.yml,compose-indexer.yml,compose-monitoring.yml"
+      controller_restart_folder: "[[controller_restart_folder]]"
       severity: critical
     annotations:
       summary: "{{ $labels.instance }} is down"
@@ -99,6 +108,9 @@ groups:
     expr: absent((time() - container_last_seen{name=~"postgres.*"}) < 10)
     for: 10s
     labels:
+      controller_restart: "true"
+      controller_restart_files: "compose-graphnode.yml,compose-indexer.yml,compose-monitoring.yml"
+      controller_restart_folder: "[[controller_restart_folder]]"
       severity: critical
     annotations:
       summary: "{{ $labels.instance }} down"
@@ -122,29 +134,29 @@ groups:
       summary: "{{ $labels.instance }} high memory usage"
       description: "{{ $labels.instance }} memory consumption is at {{ humanize $value}}."
 
-  - alert: nginx_down
-    expr: absent((time() - container_last_seen{name="nginx-proxy"}) < 10)
-    for: 30s
-    labels:
-      severity: critical
-    annotations:
-      summary: "Nginx down"
-      description: "Nginx container is down for more than 30 seconds."
+  # - alert: nginx_down
+  #   expr: absent((time() - container_last_seen{name="nginx-proxy"}) < 10)
+  #   for: 30s
+  #   labels:
+  #     severity: critical
+  #   annotations:
+  #     summary: "Nginx down"
+  #     description: "Nginx container is down for more than 30 seconds."
 
-  - alert: nginx_high_cpu
-    expr: sum(rate(container_cpu_usage_seconds_total{name="nginx-proxy"}[1m])) / count(node_cpu_seconds_total{mode="system"}) * 100 > 10
-    for: 30s
-    labels:
-      severity: warning
-    annotations:
-      summary: "Nginx high CPU usage"
-      description: "PostNginxgres CPU usage is {{ humanize $value}}%."
+  # - alert: nginx_high_cpu
+  #   expr: sum(rate(container_cpu_usage_seconds_total{name="nginx-proxy"}[1m])) / count(node_cpu_seconds_total{mode="system"}) * 100 > 10
+  #   for: 30s
+  #   labels:
+  #     severity: warning
+  #   annotations:
+  #     summary: "Nginx high CPU usage"
+  #     description: "PostNginxgres CPU usage is {{ humanize $value}}%."
 
-  - alert: nginx_high_memory
-    expr: sum(container_memory_usage_bytes{name="nginx-proxy"}) > 1200000000
-    for: 30s
-    labels:
-      severity: warning
-    annotations:
-      summary: "Nginx high memory usage"
-      description: "Nginx memory consumption is at {{ humanize $value}}."
+  # - alert: nginx_high_memory
+  #   expr: sum(container_memory_usage_bytes{name="nginx-proxy"}) > 1200000000
+  #   for: 30s
+  #   labels:
+  #     severity: warning
+  #   annotations:
+  #     summary: "Nginx high memory usage"
+  #     description: "Nginx memory consumption is at {{ humanize $value}}."
