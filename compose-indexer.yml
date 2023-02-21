@@ -11,8 +11,8 @@ networks:
   monitor-net:
     driver: bridge
   traefik_proxy:
-    external:
-      name: traefik_proxy
+    external: true
+    name: traefik_proxy
 
 volumes:
     postgres2_data: {}
