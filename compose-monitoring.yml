@@ -175,12 +175,12 @@ services:
       - 3000:3000
     networks:
       - monitor-net
-      
+      - traefik_proxy
     extra_hosts:
       - host.docker.internal:host-gateway
     labels:
       - "org.label-schema.group=monitoring"
-      
+      - "traefik_template=name:graph-grafana port:3000 prefix:/dashboard"
     logging: *default-logging
 
 
