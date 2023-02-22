@@ -16,7 +16,7 @@ policies:
     # <duration> How long to initially wait to send a notification for a group
     #            of alerts. Allows to collect more initial alerts for the same group.
     #            (Usually ~0s to few minutes), default = 30s
-    group_wait: 30s
+    group_wait: 5m
 
     # <duration> How long to wait before sending a notification about new alerts that
     #            are added to a group of alerts for which an initial notification has
